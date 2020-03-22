@@ -16,10 +16,17 @@ import (
 
 func main() {
 
-	f, err := os.OpenFile("/log/tweeter.log",
+	hostname, err := os.Hostname()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	logfilename := "/log/tweeter-"+hostname+".log"
+	fmt.Println(logfilename)
+	f, err := os.OpenFile(logfilename,
 		os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		log.Println(err)
+		log.Fatal(err)
 	}
 	defer f.Close()
 	logger := log.New(f, "prefix", log.LstdFlags)
