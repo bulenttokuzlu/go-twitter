@@ -36,6 +36,7 @@ func main() {
 	consumerSecret := flags.String("consumer-secret", "", "Twitter Consumer Secret")
 	accessToken := flags.String("access-token", "", "Twitter Access Token")
 	accessSecret := flags.String("access-secret", "", "Twitter Access Secret")
+	keyword := flags.String("keyword", "", "Twitter Search Keyword")
 	flags.Parse(os.Args[1:])
 	flagutil.SetFlagsFromEnv(flags, "TWITTER")
 
@@ -69,7 +70,8 @@ func main() {
 
 	// FILTER
 	filterParams := &twitter.StreamFilterParams{
-		Track:         []string{"korona"},
+		Track:         []string{keyword},
+//		Track:         []string{"korona"},
 		StallWarnings: twitter.Bool(true),
 	}
 	stream, err := client.Streams.Filter(filterParams)
