@@ -70,7 +70,7 @@ func main() {
 
 	// FILTER
 	filterParams := &twitter.StreamFilterParams{
-		Track:         []string{keyword},
+		Track:         []string{*keyword},
 //		Track:         []string{"korona"},
 		StallWarnings: twitter.Bool(true),
 	}
