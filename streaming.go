@@ -21,7 +21,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	logfilename := "/log/tweeter-"+hostname+".log"
+	logfilename := "/log/tweeter-" + hostname + ".log"
 	fmt.Println(logfilename)
 	f, err := os.OpenFile(logfilename,
 		os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -57,7 +57,8 @@ func main() {
 	demux.Tweet = func(tweet *twitter.Tweet) {
 		//		fmt.Println(tweet.Text)
 		tweetJSON, _ := json.Marshal(tweet)
-		logger.Println(string(tweetJSON))
+		fmt.Println(string(tweetJSON))
+		logger.Println(tweet.Text)
 	}
 	demux.DM = func(dm *twitter.DirectMessage) {
 		logger.Println(dm.SenderID)
@@ -70,8 +71,8 @@ func main() {
 
 	// FILTER
 	filterParams := &twitter.StreamFilterParams{
-		Track:         []string{*keyword},
-//		Track:         []string{"korona"},
+		Track: []string{*keyword},
+		//		Track:         []string{"korona"},
 		StallWarnings: twitter.Bool(true),
 	}
 	stream, err := client.Streams.Filter(filterParams)
