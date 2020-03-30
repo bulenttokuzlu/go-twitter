@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -66,8 +65,8 @@ func main() {
 	demux := twitter.NewSwitchDemux()
 	demux.Tweet = func(tweet *twitter.Tweet) {
 		//		fmt.Println(tweet.Text)
-		tweetJSON, _ := json.Marshal(tweet)
-		fmt.Println(string(tweetJSON))
+		//tweetJSON, _ := json.Marshal(tweet)
+		//fmt.Println(string(tweetJSON))
 		logger.Println(tweet.Text)
 	}
 	demux.DM = func(dm *twitter.DirectMessage) {
